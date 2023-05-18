@@ -19,6 +19,12 @@ jobs:
       - name: Setup MSBuild path
         uses: microsoft/setup-msbuild@v1.0.2
 
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: Restore NuGet packages
+        run: nuget restore
+
       - name: Publish to folder
         run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
 
@@ -47,5 +53,5 @@ jobs:
         with:
           app-name: 'kvnbasicpage'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1229C7885C6D40ECB202D2072E742050 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_69C8565C119D4260A8A5971A53FAB541 }}
           package: .
